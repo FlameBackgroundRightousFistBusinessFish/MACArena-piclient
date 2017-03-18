@@ -57,19 +57,21 @@ while (len(storedMonsters) < 3):
 
 #Connect to server
 sock = socket.socket()
-host = None
+host = "localhost"
 port = 1337
 
 sock.connect((host,port))
 
 #For all the devices we've collected, serialise them into a JSON packet
 
+writeString = ""
+
 for device in storedMonsters: 
     writeString = writeString+"{\"MAC\":\""+str(device)+"\"},"
 
 writeString = writeString[0:-1] #remove the trailing comma
 
-sock.write("{\"deviceList\":"+writeString+"}")
+sock.send(str("{\"deviceList\":"+writeString+"}").encode())
 
 #Check if other people connected
 #Send MAC address
