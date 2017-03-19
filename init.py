@@ -55,13 +55,15 @@ while (len(storedMonsters) < 3):
     #Pick or decline
 
     picked = None
+
     while(gpio.input(23) == 0 and gpio.input(24) == 1):
+
         if gpio.input(23) == 1:
             picked = True
         elif gpio.input(24) == 0:
             picked = False
 
-    if picked:
+    if picked == True:
         print ("You picked: "+str(pickedDevice))
 #        subprocess.call(['sudo','python2','write_minishift.py',"You picked "+str(pickedDevice)+"!"])
 
@@ -73,10 +75,13 @@ while (len(storedMonsters) < 3):
     deviceList.remove(pickedDevice)
 
     #add to pocket
-    if picked:
+    if picked == True:
         storedMonsters.append(pickedDevice)
         MacBank.write(str(pickedDevice)+"\n")
 
+
+
+print ("You've gotL "+str(storedMonsters))
 
 #Connect to server
 sock = socket.socket()
