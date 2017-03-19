@@ -50,10 +50,10 @@ while (len(storedMonsters) < 3):
     #Pick or decline
 
     picked = None
-    while(gpio.input(13) == 0 or gpio.input(14) == 1):
-        if gpio.input(13) == 1:
+    while(gpio.input(23) == 0 or gpio.input(24) == 1):
+        if gpio.input(23) == 1:
             picked = True
-        elif gpio.input(14) == 0:
+        elif gpio.input(24) == 0:
             picked = False
 
     if picked:
