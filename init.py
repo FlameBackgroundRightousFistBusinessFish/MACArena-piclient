@@ -31,6 +31,11 @@ while (len(storedMonsters) < 3):
 
 #    subprocess.call(['sudo','python2','write_minishift.py',deviceString])
 
+    if (len(deviceList) <=0):
+        print("Not enough devices!")
+        break
+
+
     #Randomly pick one from the list
     rand = random.randint(0, len(deviceList)-1)
 
@@ -57,7 +62,7 @@ while (len(storedMonsters) < 3):
             picked = False
 
     if picked:
-        print ("You picked: "+pickedDevice)
+        print ("You picked: "+str(pickedDevice))
 #        subprocess.call(['sudo','python2','write_minishift.py',"You picked "+str(pickedDevice)+"!"])
 
 
