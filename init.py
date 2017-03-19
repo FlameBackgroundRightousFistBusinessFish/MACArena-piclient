@@ -2,11 +2,11 @@ import bluetooth
 import random
 import socket
 import subprocess
-import RPi.GPIO as gpio
-
-gpio.setmode(gpio.BCM)
-gpio.setup(23, gpio.IN, pull_up_down=gpio.PUD_DOWN)
-gpio.setup(24, gpio.IN, pull_up_down=gpio.PUD_UP)
+#import RPi.GPIO as gpio 
+#
+#gpio.setmode(gpio.BCM)
+#gpio.setup(23, gpio.IN, pull_up_down=gpio.PUD_DOWN)
+#gpio.setup(24, gpio.IN, pull_up_down=gpio.PUD_UP)
 
 
 MacBank = open("caught.txt", "w+")
@@ -29,7 +29,7 @@ while (len(storedMonsters) < 3):
     for devices in deviceList:
         deviceString = deviceString+str(devices)
 
-#    subprocess.call(['sudo','python2','write_minishift.py',deviceString])
+    subprocess.call(['sudo','python2','write_minishift.py',deviceString])
 
     if (len(deviceList) <=0):
         print("Not enough devices!")
@@ -48,7 +48,7 @@ while (len(storedMonsters) < 3):
     print(": ")
     print(pickedDevice)
 
-#    subprocess.call(['sudo','python2','write_minishift.py',+str(pickedDevice)+" is close enough to catch!    Catch it?"])
+    subprocess.call(['sudo','python2','write_minishift.py',str(pickedDevice)+" is close enough to catch!    Catch it?"])
     print("Pick?")
 
 
@@ -56,16 +56,22 @@ while (len(storedMonsters) < 3):
 
     picked = None
 
-    while(gpio.input(23) == 0 and gpio.input(24) == 1):
+    i = input()
+    if (i == "y"):
+        picked = True
+    elif (i == "n"):
+        picked = False
 
-        if gpio.input(23) == 1:
-            picked = True
-        elif gpio.input(24) == 0:
-            picked = False
+#    while(gpio.input(23) == 0 and gpio.input(24) == 1):
+#
+#        if gpio.input(23) == 1:
+#            picked = True
+#        elif gpio.input(24) == 0:
+#            picked = False
 
     if picked == True:
         print ("You picked: "+str(pickedDevice))
-#        subprocess.call(['sudo','python2','write_minishift.py',"You picked "+str(pickedDevice)+"!"])
+        subprocess.call(['sudo','python2','write_minishift.py',"You picked "+str(pickedDevice)+"!"])
 
 
     #checkForButtonYes()
@@ -83,17 +89,19 @@ while (len(storedMonsters) < 3):
 
 print ("You've got "+str(storedMonsters))
 print ("Pick a MACMonster to send to FIGHT")
+
 pickedDevice = None
 for device in storedMonsters:
 
     print(device)
 
-    while(gpio.input(23) == 0 and gpio.input(24) == 1):
+    i = input()
+    if (i == "y"):
+        pickedDevice = device
+    elif (i == "n"):
+        pickedDevice = device
 
-        if gpio.input(23) == 1:
-            pickedDevice = device
-        elif gpio.input(24) == 0:
-            pickedDevice = device
+print (pickedDevice)
 
 #Connect to server
 sock = socket.socket()
