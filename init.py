@@ -6,7 +6,7 @@ import RPi.GPIO as gpio
 
 gpio.setmode(gpio.BCM)
 gpio.setup(23, gpio.IN, pull_up_down=gpio.PUD_DOWN)
-gpio.setup(23, gpio.IN, pull_up_down=gpio.PUD_UP)
+gpio.setup(24, gpio.IN, pull_up_down=gpio.PUD_UP)
 
 
 MacBank = open("caught.txt", "w+")
