@@ -24,7 +24,7 @@ while (len(storedMonsters) < 3):
     for devices in deviceList:
         deviceString = deviceString+str(devices)
 
-    subprocess.call(['sudo','python2','write_minishift.py',deviceString])
+#    subprocess.call(['sudo','python2','write_minishift.py',deviceString])
 
     #Randomly pick one from the list
     rand = random.randint(0, len(deviceList)-1)
@@ -35,28 +35,38 @@ while (len(storedMonsters) < 3):
     
 
     #Show it to the user
-    print("You've picked: ")
+    print(": ")
     print(pickedDevice)
 
-    #minishift.scroll("You Picked!")
-    #minishift.scroll(pickedDevice)
+#    subprocess.call(['sudo','python2','write_minishift.py',+str(pickedDevice)+" is close enough to catch!    Catch it?"])
+    print("Pick?")
+
 
     #Pick or decline
 
+    picked = None
+    while(gpio.input(13) == 0 or gpio.input(14) == 1):
+        if gpio.input(13) == 1:
+            picked = True
+        elif gpio.input(14) == 0:
+            picked = False
+
+    if picked:
+        print ("You picked: "+picked)
+#        subprocess.call(['sudo','python2','write_minishift.py',"You picked "+str(pickedDevice)+"!"])
+
+
     #checkForButtonYes()
-
-
-    #Add to bank of addresses (a file?)
 
     #Remove from deviceList
 
     deviceList.remove(pickedDevice)
 
     #add to pocket
-    storedMonsters.append(pickedDevice)
-    MacBank.write(str(pickedDevice)+"\n")
+    if picked:
+        storedMonsters.append(pickedDevice)
+        MacBank.write(str(pickedDevice)+"\n")
 
-#Repet until selected 3
 
 #Connect to server
 sock = socket.socket()
