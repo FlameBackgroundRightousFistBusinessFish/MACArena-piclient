@@ -21,15 +21,9 @@ while (len(storedMonsters) < 3):
 
 
     #Display all the addresses
-    print("You've found all these MACMAC's in the area!")
-    print(deviceList)
 
 
-    deviceString = ""
-    for devices in deviceList:
-        deviceString = deviceString+str(devices)
-
-    subprocess.call(['sudo','python2','write_minishift.py',deviceString])
+    subprocess.call(['sudo','python2','write_minishift.py',"You've found "+str(len(deviceList))+" MAC address"])
 
     if (len(deviceList) <=0):
         print("Not enough devices!")

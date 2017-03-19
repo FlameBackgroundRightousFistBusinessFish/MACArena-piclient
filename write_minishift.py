@@ -3,7 +3,7 @@ import minishift
 import time
 
 #Minishift details
-width = 40
+width = 8*6
 vid, pid = 0x04d8, 0xf517
 
 ms = minishift.Minishift(minishift.MCP2210Interface(vid, pid), width)
