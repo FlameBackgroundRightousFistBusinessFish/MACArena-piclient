@@ -81,15 +81,7 @@ while (len(storedMonsters) < 3):
 
 
 
-print ("You've gotL "+str(storedMonsters))
-
-#Connect to server
-sock = socket.socket()
-host = "localhost"
-port = 1337
-
-sock.connect((host,port))
-
+print ("You've got "+str(storedMonsters))
 print ("Pick a MACMonster to send to FIGHT")
 pickedDevice = None
 for device in storedMonsters:
@@ -102,6 +94,14 @@ for device in storedMonsters:
             pickedDevice = device
         elif gpio.input(24) == 0:
             pickedDevice = device
+
+#Connect to server
+sock = socket.socket()
+host = "localhost"
+port = 1337
+
+sock.connect((host,port))
+
 
 sock.send(str(pickedDevice).encode())
 
