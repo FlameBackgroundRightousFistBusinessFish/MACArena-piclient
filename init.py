@@ -57,7 +57,7 @@ while (len(storedMonsters) < 3):
             picked = False
 
     if picked:
-        print ("You picked: "+picked)
+        print ("You picked: "+pickedDevice)
 #        subprocess.call(['sudo','python2','write_minishift.py',"You picked "+str(pickedDevice)+"!"])
 
 
