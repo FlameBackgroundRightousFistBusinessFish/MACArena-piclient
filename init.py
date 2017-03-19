@@ -4,6 +4,7 @@ import socket
 import subprocess
 import RPi.GPIO as gpio
 
+gpio.setmode(gpio.BCM)
 
 MacBank = open("caught.txt", "w+")
 
