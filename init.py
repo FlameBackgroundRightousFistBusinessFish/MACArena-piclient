@@ -90,16 +90,20 @@ port = 1337
 
 sock.connect((host,port))
 
-#For all the devices we've collected, serialise them into a JSON packet
+print ("Pick a MACMonster to send to FIGHT")
+pickedDevice = None
+for device in storedMonsters:
 
-writeString = ""
+    print(device)
 
-for device in storedMonsters: 
-    writeString = writeString+"{\"MAC\":\""+str(device)+"\"},"
+    while(gpio.input(23) == 0 and gpio.input(24) == 1):
 
-writeString = writeString[0:-1] #remove the trailing comma
+        if gpio.input(23) == 1:
+            pickedDevice = device
+        elif gpio.input(24) == 0:
+            pickedDevice = device
 
-sock.send(str("{\"deviceList\":"+writeString+"}").encode())
+sock.send(str(pickedDevice).encode())
 
 #Check if other people connected
 #Send MAC address
