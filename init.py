@@ -2,6 +2,7 @@ import bluetooth
 import random
 import socket
 import subprocess
+import RPi.GPIO as gpio
 
 
 MacBank = open("caught.txt", "w+")
