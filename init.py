@@ -1,8 +1,7 @@
 import bluetooth
 import random
 import socket
-
-
+import subprocess
 
 
 MacBank = open("caught.txt", "w+")
@@ -20,8 +19,12 @@ while (len(storedMonsters) < 3):
     print("You've found all these MACMAC's in the area!")
     print(deviceList)
 
-    #for devices in deviceList()
-    #minishift.scroll(deviceList)
+
+    deviceString = ""
+    for devices in deviceList:
+        deviceString = deviceString+str(devices)
+
+    subprocess.call(['sudo','python2','write_minishift.py',deviceString])
 
     #Randomly pick one from the list
     rand = random.randint(0, len(deviceList)-1)
@@ -76,3 +79,5 @@ sock.send(str("{\"deviceList\":"+writeString+"}").encode())
 #Check if other people connected
 #Send MAC address
 #Wait until we're told we've won
+
+
